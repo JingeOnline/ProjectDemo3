@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h1>Table={{ result_dic.table }}</h1>
+<h1>Device={{ result_dic.device }}</h1>
+
+
+{% for item in result_dic.content %}
+    {{ item }}<br/>
+{% endfor %}
+<h1 align="center">
+<span class="step-links">
+    {% if result_dic.content.has_previous %}
+        <a href="{{ result_dic.currentURL }}{{ result_dic.content.previous_page_number }}">
+           {{ result_dic.content.previous_page_number }}
+       </a>
+    {% endif %}
+    {{ result_dic.content }}
+    {% if result_dic.content.has_next %}
+        <a href="{{ result_dic.currentURL }}{{ result_dic.content.next_page_number }}">
+        {{ result_dic.content.next_page_number }}
+        </a>
+    {% endif %}
+</span>
+</h1>
+</body>
+</html>

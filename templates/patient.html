@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1 align="center">Patient document</h1>
+<Form method="post" action="{% url 'patient' result_dic.id %}">
+    {% csrf_token %}
+    <table border="1" align="center">
+        <tr>
+            <td>Field</td>
+            <td>Current vlaue</td>
+            <td>Edit</td>
+            <td>Update</td>
+        </tr>
+        <tr>
+            <td>ID</td>
+            <td>
+                {{ result_dic.id }}
+            </td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>
+                {{ result_dic.name }}
+            </td>
+            <td>
+                <input type="text" name="patient_name">
+            </td>
+            <td>
+                <button type="submit" >Update</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td>
+                {{ result_dic.age }}
+            </td>
+            <td>
+                <input type="text" name="patient_age">
+            </td>
+            <td>
+                <button type="submit" >Update</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>
+                {{ result_dic.gender }}
+            </td>
+            <td>
+                <input type="text" name="patient_gender">
+            </td>
+            <td>
+                <button type="submit" >Update</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>
+                {{ result_dic.description }}
+            </td>
+            <td>
+                <input type="text" name="patient_description">
+            </td>
+            <td>
+                <button type="submit" >Update</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Device binding</td>
+            <td>
+                {{ result_dic.device }}
+            </td>
+            <td>
+                <input type="text" name="patient_device">
+            </td>
+            <td>
+                <button type="submit" >Update</button>
+            </td>
+        </tr>
+    </table>
+</Form>
+</body>
+</html>

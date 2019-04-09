@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1>Device data</h1>
+<br>
+<table border="1">
+        <tr>
+            <td>Table name</td>
+            <td>Num of records</td>
+            <td>Go</td>
+        </tr>
+    {% for item in result_dic.table_list %}
+        <tr>
+            <td>{{ item.tab }}</td>
+            <td>{{ item.num }}</td>
+            <td>
+                <a href="{% url 'recordsInTable' result_dic.device_id item.tab %}">GO</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

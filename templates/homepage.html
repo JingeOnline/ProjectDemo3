@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1>HomePage</h1>
+<div align="right">
+    <table border="3">
+        {#        <tr>#}
+        {#            <td>#}
+        {#                <a href="{% url 'edit_profile' %}">edit profile</a>#}
+        {#            </td>#}
+        {#            <td>#}
+        {#                <a href="{% url 'logout' %}">logout</a>#}
+        {#            </td>#}
+        {#        </tr>#}
+        {% if user.is_authenticated %}
+            <li>User: {{ user.get_username }}</li>
+            {#            跳转到当前页面，request.path获得当前页面的URL#}
+            <li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+        {% endif %}
+    </table>
+</div>
+<div align="center">
+    <h2>Search device by device_id:</h2>
+    <form method="get" action="{% url 'devices' %}">
+        {% csrf_token %}
+        <input type="text" name="query_text"/>
+        <input type="submit" value="search"/>
+    </form>
+</div>
+<h1></h1>
+<div align="center" style="width:500px; height:auto; float:left; display:inline">
+    {% if user.is_authenticated %}
+        <table border="1">
+            <tr>
+                <td>Search history</td>
+                <td>Go</td>
+            </tr>
+            {% for item in result_dic.search_history %}
+                <tr>
+                    <td>{{ item.search_text }}</td>
+                    <td>
+                        <form method="get" action="{% url 'devices' %}">
+                            <button name="query_text" value="{{ item.search_text }}">GO</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</div>
+<div align="center" style="width:800px; height:auto; float:left; display:inline">
+    {% if user.is_authenticated %}
+        <table border="1">
+            <tr>
+                <td>Patient ID</td>
+                <td>Patient name</td>
+                <td>Patient device</td>
+                <td>Edit</td>
+                <td>Go</td>
+            </tr>
+            {% for item in result_dic.patient_list %}
+                <tr>
+                    <td>{{ item.patient }}</td>
+                    <td>{{ item.patient__name }}</td>
+                    <td>{{ item.patient__device }}</td>
+                    <td>
+                        <a href="{% url 'patient' item.patient %}">Edit</a>
+                    </td>
+                    <td>
+                        {% if item.patient__device %}
+                            <a href="{% url 'tablesInDevice' item.patient__device %}">GO</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</div>
+</body>
+</html>
